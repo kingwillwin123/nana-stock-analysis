@@ -63,7 +63,8 @@ jobs:
           OPENAI_MODEL: 'MiniMax-M2.5'
           LLM_TEMPERATURE: 0.7
           
-          # 搜索服务 - 使用免费的MiniMax和Bocha
+          # 搜索服务 - QVeris + MiniMax
+          QVERIS_API_KEY: ${{ secrets.QVERIS_API_KEY }}
           MINIMAX_API_KEYS: ${{ secrets.MINIMAX_API_KEYS }}
           BOCHA_API_KEYS: ${{ secrets.BOCHA_API_KEYS }}
           
