@@ -65,7 +65,7 @@ jobs:
           
           # 搜索服务 - QVeris + MiniMax
           QVERIS_API_KEY: ${{ secrets.QVERIS_API_KEY }}
-          MINIMAX_API_KEYS: ${{ secrets.MINIMAX_API_KEYS }}
+          MINIMAX_API_KEY: ${{ secrets.MINIMAX_API_KEY }}
           BOCHA_API_KEYS: ${{ secrets.BOCHA_API_KEYS }}
           
           # 推送 - 飞书
@@ -91,13 +91,20 @@ jobs:
           echo "🚀 NANA股票分析系统"
           echo "=========================================="
           echo "⏰ 时间: $(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S')"
-          echo "🤖 模型: Gemini 2.5 Flash"
+          echo "🤖 模型: MiniMax-M2.5"
           echo "📊 数据源: AkShare + 腾讯"
           echo "📱 推送: 飞书"
           echo "=========================================="
           
+          # 判断运行模式
+          FORCE_RUN_ARG=""
+          if [ "${{ github.event.inputs.force_run }}" = "true" ]; then
+            FORCE_RUN_ARG="--force-run"
+            echo "⚡ 强制运行模式（跳过交易日检查）"
+          fi
+          
           # 执行分析
-          python main.py
+          python main.py $FORCE_RUN_ARG
       
       - name: 上传报告
         uses: actions/upload-artifact@v4
