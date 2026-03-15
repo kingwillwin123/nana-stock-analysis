@@ -1,9 +1,9 @@
 name: NANA股票分析-每4小时
 
 on:
-  # 定时触发 - 每4小时运行一次
+  # 定时触发 - 每4小时运行一次（仅工作日）
   schedule:
-    - cron: '0 */4 * * *'     # 每4小时运行一次
+    - cron: '0 */4 * * 1-5'     # 周一到周五，每4小时
   
   # 手动触发
   workflow_dispatch:
@@ -79,7 +79,7 @@ jobs:
           REPORT_TYPE: 'simple'           # 精简报告
           SINGLE_STOCK_NOTIFY: 'false'    # 汇总推送
           MARKET_REVIEW_ENABLED: 'true'   # 包含大盘复盘
-          TRADING_DAY_CHECK_ENABLED: 'false'  # 每天运行（包括周末）
+          TRADING_DAY_CHECK_ENABLED: 'true'  # 仅交易日运行（周末跳过）
           
           # 系统配置
           LOG_LEVEL: INFO
