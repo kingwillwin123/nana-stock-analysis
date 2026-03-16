@@ -62,16 +62,11 @@ jobs:
       
       - name: 执行股票分析
         env:
-          # AI配置 - MiniMax (使用OpenAI兼容模式)
-          OPENAI_API_KEY: ${{ secrets.MINIMAX_API_KEY }}
-          OPENAI_BASE_URL: 'https://api.minimaxi.chat/v1'
-          OPENAI_MODEL: 'MiniMax-M2.5'
-          LLM_TEMPERATURE: 0.7
+          # AI配置 - 使用Gemini（免费额度，更稳定）
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           
-          # 搜索服务 - QVeris + MiniMax
+          # 搜索服务 - QVeris
           QVERIS_API_KEY: ${{ secrets.QVERIS_API_KEY }}
-          MINIMAX_API_KEY: ${{ secrets.MINIMAX_API_KEY }}
-          BOCHA_API_KEYS: ${{ secrets.BOCHA_API_KEYS }}
           
           # 推送 - 飞书
           FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
